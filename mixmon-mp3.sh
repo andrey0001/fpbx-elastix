@@ -1,24 +1,27 @@
 #!/bin/bash
+#
+# For Elastix < 2.5 (FreePBX 2.8)
+# Filename: /etc/asterisk/scripts/mixmon-mp3.sh
+# Author: Andrey Sorokin (aka shadow_alone) andrey@sorokin.org
+# Article in Russian - http://andrey.org/mp3-elastix-2-5-frepbx-2-11/
+# -----------------------------------
+# To enable:
+# rpm -Uhv http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el5.rf.x86_64.rpm
+# yum --disablerepo=commercial-addons install ffmpeg lame
+# -> General Settings
+# Run after record: /etc/asterisk/scripts/mixmon-mp3.sh ^{MIXMON_DIR} ^{CALLFILENAME} ^{MIXMON_FORMAT}
+# Recording Location: /var/spool/asterisk/monitor/
+# ------------------------------------
 
 if [ -z "${MIXMONFILE}" ]; then
 MIXMONFILE=${1}/${2}.${3}
 fi
 
-#if [ -z "${1}" ]; then
-#TEMPDIR="/var/spool/asterisk/monitor/"
-#else
-#TEMPDIR=${1}
-#fi
-
-
 WAVFILE=${MIXMONFILE}
 MP3FILE=`echo ${WAVFILE} | /bin/sed 's/.wav/.mp3/g'`
 
-#echo $MP3FILE
 SUDO="/usr/bin/sudo"
 LOWNICE="/bin/nice -n 19 /usr/bin/ionice -c3"
-
-
 
 ${SUDO} ${LOWNICE} /usr/bin/lame --quiet --preset phone -h -v ${WAVFILE} ${MP3FILE}
 ${SUDO} /bin/chmod --reference=${WAVFILE} ${MP3FILE}

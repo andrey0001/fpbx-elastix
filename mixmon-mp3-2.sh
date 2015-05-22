@@ -1,7 +1,9 @@
 #!/bin/bash
 #
+# For Elastix 2.5 (FreePBX 2.11)
 # Filename: /etc/asterisk/scripts/mixmon-mp3-2.sh
 # Author: Andrey Sorokin (aka shadow_alone) andrey@sorokin.org
+# Article in Russian - http://andrey.org/mp3-elastix-2-5-frepbx-2-11/
 # -----------------------------------
 # To enable:
 # rpm -Uhv http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el5.rf.x86_64.rpm
