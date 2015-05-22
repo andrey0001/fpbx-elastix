@@ -1,0 +1,8 @@
+asterisk ALL = NOPASSWD: /bin/nice
+asterisk ALL = NOPASSWD: /usr/bin/ionice
+asterisk ALL = NOPASSWD: /bin/chmod
+asterisk ALL = NOPASSWD: /bin/chown
+asterisk ALL = NOPASSWD: /bin/mv
+asterisk ALL = NOPASSWD: /bin/rm
+asterisk ALL = NOPASSWD: /bin/touch
+
