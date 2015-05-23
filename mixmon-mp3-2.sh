@@ -35,10 +35,10 @@ FFILENAME=${SPOOLDIR}${YEAR}/${MONTH}/${DAY}/${CALLFILENAME}.${MIXMON_FORMAT}
 WAVFILE=${FFILENAME}
 MP3FILE=`echo ${WAVFILE} | /bin/sed 's/.wav/.mp3/g'`
 
-#SUDO="/usr/bin/sudo"
+SUDO="/usr/bin/sudo"
 LOWNICE="/bin/nice -n 19 /usr/bin/ionice -c3"
 
-${LOWNICE} /usr/bin/lame --quiet --preset phone -h -v ${WAVFILE} ${MP3FILE}
+${SUDO} ${LOWNICE} /usr/bin/lame --quiet --preset phone -h -v ${WAVFILE} ${MP3FILE}
 
 /bin/chmod --reference=${WAVFILE} ${MP3FILE}
 /bin/touch --reference=${WAVFILE} ${MP3FILE}
@@ -46,7 +46,7 @@ ${LOWNICE} /usr/bin/lame --quiet --preset phone -h -v ${WAVFILE} ${MP3FILE}
 
 /usr/bin/test -e ${MP3FILE} && /bin/rm -f ${WAVFILE}
 
-${LOWNICE} /usr/bin/ffmpeg -loglevel quiet -y -i ${MP3FILE} -f wav -acodec copy ${WAVFILE} >/dev/null 2>&1
+${SUDO} ${LOWNICE} /usr/bin/ffmpeg -loglevel quiet -y -i ${MP3FILE} -f wav -acodec copy ${WAVFILE} >/dev/null 2>&1
 
 /bin/chmod --reference=${MP3FILE} ${WAVFILE}
 /bin/touch --reference=${MP3FILE} ${WAVFILE}
